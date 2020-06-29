@@ -3,10 +3,18 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { EventTimerComponent } from './event-timer/event-timer.component';
+import { NotesComponent } from './notes/notes.component';
+import { RecipeComponent } from './recipe/recipe.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    EventTimerComponent,
+    NotesComponent,
+    RecipeComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
