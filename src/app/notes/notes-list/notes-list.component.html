@@ -1,0 +1,9 @@
+<h3>Your Notes </h3>
+
+
+
+<app-notes-item
+*ngFor="let note of notes; let i = index"
+[notes]="note"
+[index]="i"
+></app-notes-item>
