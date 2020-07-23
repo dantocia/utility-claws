@@ -1,5 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
+import {ReactiveFormsModule} from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +14,8 @@ import { HomeComponent } from './home/home.component';
 import { NotesEditComponent } from './notes/notes-edit/notes-edit.component';
 import { NotesListComponent } from './notes/notes-list/notes-list.component';
 import { NotesItemComponent } from './notes/notes-list/notes-item/notes-item.component';
+import { NgbdDatepickerPopup } from './datepicker-popup/datepicker-popup.component';
+
 
 @NgModule({
   declarations: [
@@ -22,11 +27,15 @@ import { NotesItemComponent } from './notes/notes-list/notes-item/notes-item.com
     HomeComponent,
     NotesEditComponent,
     NotesListComponent,
-    NotesItemComponent
+    NotesItemComponent,
+    NgbdDatepickerPopup
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    FormsModule,
+    ReactiveFormsModule,
+    AppRoutingModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
