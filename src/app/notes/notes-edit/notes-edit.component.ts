@@ -24,7 +24,6 @@ export class NotesEditComponent implements OnInit {
   onSubmit(){
     console.warn(this.notesForm.value);
     this.notesService.addRecipe(this.notesForm.value);
-
   }
   onCancel(){
     console.log('on cancel');
