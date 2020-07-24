@@ -14,7 +14,6 @@ import { HomeComponent } from './home/home.component';
 import { NotesEditComponent } from './notes/notes-edit/notes-edit.component';
 import { NotesListComponent } from './notes/notes-list/notes-list.component';
 import { NotesItemComponent } from './notes/notes-list/notes-item/notes-item.component';
-import { NgbdDatepickerPopup } from './datepicker-popup/datepicker-popup.component';
 
 
 @NgModule({
@@ -27,8 +26,7 @@ import { NgbdDatepickerPopup } from './datepicker-popup/datepicker-popup.compone
     HomeComponent,
     NotesEditComponent,
     NotesListComponent,
-    NotesItemComponent,
-    NgbdDatepickerPopup
+    NotesItemComponent
   ],
   imports: [
     BrowserModule,

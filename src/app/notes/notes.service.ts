@@ -9,8 +9,8 @@ export class NotesServices {
     notesChanged = new Subject<Note[]>();
     
     private notes: Note[] = [
-        new Note('Test Name', 'Test Description'),
-        new Note('Test n2', 'Test d2'),
+        new Note('Test Name', 'Test Description',{day:'29',month:'01',year:'1993'}),
+        new Note('Test n2', 'Test d2',{day:'26',month:'01',year:'1994'}),
     ];
     
     getNotes(){

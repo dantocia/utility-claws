@@ -12,11 +12,16 @@ style="cursor: pointer;"
 routerLinkActive="active"
 
 >
-<div class="card-group">
+<div class="card-group w-75">
     <div class="card text-white bg-dark mb-1">
         <h5 class="card-header">{{ notes.name }}</h5>
       <div class="card-body">
         <p class="card-text">{{ notes.desc }}</p>
+      </div>
+      <div class="card-footer">
+        <p class="card-text">{{notes.date.year}} - {{notes.date.month}} - {{notes.date.day}}</p>
+        
+        
       </div>
     </div>
 </div>

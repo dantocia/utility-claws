@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 import {FormGroup, FormControl, FormArray, Validators} from '@angular/forms';
 import { NotesServices } from '../notes.service';
+import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+
+
 
 @Component({
   selector: 'app-notes-edit',
@@ -10,9 +13,12 @@ import { NotesServices } from '../notes.service';
 })
 export class NotesEditComponent implements OnInit {
 
+  model: NgbDateStruct;
+
   notesForm= new FormGroup({
     name: new FormControl('',Validators.required),
-    desc:  new FormControl('', Validators.required)
+    desc:  new FormControl('', Validators.required),
+    date: new FormControl('', Validators.required )
 
   })
 
@@ -22,7 +28,7 @@ export class NotesEditComponent implements OnInit {
   ngOnInit() {
   }
   onSubmit(){
-    console.warn(this.notesForm.value);
+    console.log(this.notesForm.value);
     this.notesService.addRecipe(this.notesForm.value);
   }
   onCancel(){
