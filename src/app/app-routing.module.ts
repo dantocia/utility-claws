@@ -4,6 +4,7 @@ import {EventTimerComponent} from './event-timer/event-timer.component';
 import {NotesComponent} from './notes/notes.component';
 import {RecipeComponent} from './recipe/recipe.component';
 import { HomeComponent } from './home/home.component';
+import { NotesEditComponent } from './notes/notes-edit/notes-edit.component';
 
 
 
@@ -11,7 +12,8 @@ import { HomeComponent } from './home/home.component';
 const routes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'event-timer', component: EventTimerComponent },
-  { path: 'notes', component: NotesComponent},
+  { path: 'notes', component: NotesComponent}, 
+    {path: 'notes/new', component: NotesEditComponent},
   { path: 'recipe', component: RecipeComponent}
   //{ path: '',}
 

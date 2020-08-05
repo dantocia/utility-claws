@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 
 import {FormGroup, FormControl, FormArray, Validators} from '@angular/forms';
 import { NotesServices } from '../notes.service';
 import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+
 
 
 
@@ -24,16 +26,19 @@ export class NotesEditComponent implements OnInit {
   })
 
   
-  constructor(private notesService: NotesServices) { }
+  constructor(private notesService: NotesServices, private route: ActivatedRoute,
+      private router: Router) { }
 
   ngOnInit() {
   }
   onSubmit(){
     console.log(this.notesForm.value);
     this.notesService.addRecipe(this.notesForm.value);
+    this.onCancel()
   }
   onCancel(){
     console.log('on cancel');
+    this.router.navigate(['../'], {relativeTo: this.route});
   }
   
   
