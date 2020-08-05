@@ -3,15 +3,13 @@
     <h3>Welcome to Claw Notes! Create a new Event Note or choose one to start editing! rawr !</h3>
 
 </div>
-<button type="button" class="btn btn-success mr-1">New event Note!</button>
+<button type="button" class="btn btn-success mr-1" (click)="toNewNote()">New event Note!</button>
 <hr>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-8 offset-md-2">
         <app-notes-list></app-notes-list>
     </div>
-    <div class="col-md-6">
-        <app-notes-edit></app-notes-edit>
-    </div>
+    
 
 </div>
 
