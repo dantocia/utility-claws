@@ -24,12 +24,16 @@
 							<h5 class="card-header">Date:</h5>
 							<div class="card-footer">
 								<div class="input-group">
-									<input class="form-control" formControlName="date" placeholder="yyyy-mm-dd"
-								name="dp"  ngbDatepicker #d="ngbDatepicker">
-								
-								<div class="input-group-append">
-								<button class="btn btn-outline-light btn-sm" (click)="d.toggle()" type="button">pick your date mate!</button>
-								</div>
+										<input 
+										class="form-control" 
+										formControlName="date" 
+										placeholder="yyyy-mm-dd"
+										name="dp"  
+										ngbDatepicker #d="ngbDatepicker">
+									
+									<div class="input-group-append">
+										<button class="btn btn-outline-light btn-sm" (click)="d.toggle()" type="button">pick your date mate!</button>
+									</div>
 
 								</div>
 								

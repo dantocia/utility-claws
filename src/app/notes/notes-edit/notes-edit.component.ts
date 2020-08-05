@@ -19,6 +19,7 @@ export class NotesEditComponent implements OnInit {
     name: new FormControl('',Validators.required),
     desc:  new FormControl('', Validators.required),
     date: new FormControl('', Validators.required )
+    
 
   })
 

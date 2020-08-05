@@ -16,4 +16,6 @@ export class NotesItemComponent implements OnInit {
  @Input() notes: Note;
  @Input() index: number;
 
+
+
 }
