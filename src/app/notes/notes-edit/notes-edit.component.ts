@@ -38,7 +38,7 @@ export class NotesEditComponent implements OnInit {
   }
   onCancel(){
     console.log('on cancel');
-    this.router.navigate(['../'], {relativeTo: this.route});
+    this.router.navigate(['/notes'], {relativeTo: this.route});
   }
   
   
