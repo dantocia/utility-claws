@@ -21,5 +21,15 @@ export class NotesServices {
 		this.notes.push(note);
 		this.notesChanged.next(this.notes.slice());
 
-	}
+    }
+    
+    deleteNote(index: number){
+        console.log('delete this on service: ');
+  console.log(index);
+        this.notes.splice(index,1);
+        this.notesChanged.next(this.notes.slice());
+       
+        console.log(this.notes);
+
+    }
 }

@@ -6,26 +6,45 @@ routerLinkActive="active"
 -->
 
     
-<a 
-style="cursor: pointer;" 
-[routerLink]=[index]
-routerLinkActive="active"
 
->
-<div class="card-group">
-    <div class="card text-white bg-dark mb-1">
-        <h5 class="card-header">{{ notes.name }}</h5>
-      <div class="card-body">
-        <p class="card-text">{{ notes.desc }}</p>
-      </div>
-      <div class="card-footer">
-        <p class="card-text"><strong>Event Date:</strong>  {{notes.date.year}} - {{notes.date.month}} - {{notes.date.day}}</p>
-        
-        
-      </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card-group">
+        <div class="card text-white bg-dark mb-1">
+            <h5 class="card-header">{{ notes.name }}</h5>
+          <div class="card-body">
+            <p class="card-text">{{ notes.desc }}</p>
+          </div>
+          <div class="card-footer">
+            <p class="card-text"><strong>Event Date:</strong>  {{notes.date.year}} - {{notes.date.month}} - {{notes.date.day}}</p>
+            
+            
+          </div>
+        </div>
     </div>
+    </div>
+    
+
+</div>
+  <div class="row">
+    <div class="col-md-12">
+      <button type="button" class="btn btn-primary mr-1" (click)="onEditNote()" >Edit Note</button>
+      
+    
+    
+      <button type="button" class="btn btn-danger" (click)="onDeleteNote()" >Delete Note</button>
+    </div>
+  
+  </div>
+
 </div>
 
-</a>
+
+
+
+<hr>
+
 
 
