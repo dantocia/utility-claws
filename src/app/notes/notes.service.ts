@@ -9,12 +9,15 @@ export class NotesServices {
     notesChanged = new Subject<Note[]>();
     
     private notes: Note[] = [
-        new Note('Test Name', 'Test Description',{day:'29',month:'01',year:'1993'}),
-        new Note('Test n2', 'Test d2',{day:'26',month:'01',year:'1994'}),
+        new Note('Test Name', 'Test Description',{day:29, month:0o1, year:1993}),
+        new Note('Test n2', 'Test d2',{day:26, month: 0o1, year:1994}),
     ];
     
     getNotes(){
         return this.notes.slice();
+    }
+    getNote(index: number){
+        return this.notes[index];
     }
     
     addRecipe(note: Note){
@@ -23,9 +26,15 @@ export class NotesServices {
 
     }
     
+    updateNote(index: number, newNote: Note){
+        this.notes[index] = newNote;
+        this.notesChanged.next(this.notes.slice());
+
+    }
+
     deleteNote(index: number){
-        console.log('delete this on service: ');
-  console.log(index);
+        console.log('delete this on service: '+index);
+
         this.notes.splice(index,1);
         this.notesChanged.next(this.notes.slice());
        
