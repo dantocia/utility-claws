@@ -25,8 +25,8 @@ export class NotesItemComponent implements OnInit {
 //	this.router.navigate(['../', this.id, 'edit'], {relativeTo: this.route})
 }
 onDeleteNote(){
-  console.log('delete this: ');
-  console.log(this.index);
+  console.log('delete this: '+this.index);
+  
   this.notesService.deleteNote(this.index);
   
 }
