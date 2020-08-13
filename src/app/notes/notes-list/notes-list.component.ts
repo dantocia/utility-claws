@@ -10,8 +10,10 @@ import { Subscription } from 'rxjs';
 })
 export class NotesListComponent implements OnInit,OnDestroy {
 
+
   notes: Note[];
   subscription: Subscription;
+
 
   constructor( private notesServices: NotesServices) { }
   
@@ -21,11 +23,15 @@ export class NotesListComponent implements OnInit,OnDestroy {
     .subscribe(
       (notes: Note[]) =>{
         this.notes = notes;
+        
       }
     );
+    
     console.log('hello');
     this.notes = this.notesServices.getNotes();
+    
   }
+  
 
   ngOnDestroy() {
     this.subscription.unsubscribe();

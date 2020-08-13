@@ -1,4 +1,14 @@
-<h3>Your Event Notes: </h3>
+<div class="col-md-12" *ngIf="notes.length == 0; else elseBlock">
+    
+    <h3 style="color: red;">  Your Event List seems to be Empty! Click on New Event Note to Start programming your Events!</h3>
+</div>
+<ng-template  #elseBlock> 
+    <div class="col-md-12"> 
+        <h3>Your Notes: </h3>
+    </div>
+    
+</ng-template>
+
 
 
 

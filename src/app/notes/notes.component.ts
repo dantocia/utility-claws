@@ -10,10 +10,12 @@ export class NotesComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute) { }
 
+
   ngOnInit() {
   }
 
   toNewNote(){
     this.router.navigate(['notes/new']);
   }
+  
 }
