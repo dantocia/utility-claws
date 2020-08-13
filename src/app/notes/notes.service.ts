@@ -20,7 +20,7 @@ export class NotesServices {
         return this.notes[index];
     }
     
-    addRecipe(note: Note){
+    addNote(note: Note){
 		this.notes.push(note);
 		this.notesChanged.next(this.notes.slice());
 
