@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EventTimerServices } from './event-timer.service';
 
 @Component({
   selector: 'app-event-timer',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventTimerComponent implements OnInit {
 
-  constructor() { }
+  constructor(private eventTimerServices: EventTimerServices) { }
 
   ngOnInit() {
   }
+  newEmtyTimer(){
+    this.eventTimerServices.addEmptyTimer();
 
+  }
 }

@@ -1,3 +1,25 @@
-<h1>event-timer works!</h1>
-<button type="button" class="btn btn-light">Light</button>
-<button type="button" class="btn btn-dark">Dark</button>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Welcome to the Event Timer Claw!!</h1>
+            <h3>Here you can create and manage a timer acording to your linking by clicking the button below!!!</h3>
+        </div>  
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-12">
+            <button type="button" class="btn btn-dark mr-1" (click)="newEmtyTimer()">Add Event Timer now!</button>
+            <button type="button" class="btn btn-light">Dark</button>
+        </div>
+    </div>
+</div>
+
+<hr>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-2">
+            
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

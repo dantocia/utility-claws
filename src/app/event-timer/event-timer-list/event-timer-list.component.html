@@ -1,0 +1,19 @@
+
+<div class="col-md-12" *ngIf="eventTimers.length == 0; else elseBlock">
+    
+    <h3 style="color: red;">  Your List seems to be Empty! Click on Event Timer to Start Timing!</h3>
+</div>
+<ng-template  #elseBlock> 
+    <div class="col-md-12"> 
+        <h3 style="color: blueviolet;">Avalible Timers:</h3>
+    </div>
+    
+</ng-template>
+<hr>
+
+<app-event-timer-item
+*ngFor="let eventTimer of eventTimers; let i = index"
+[eventTimers]="eventTimer"
+[index]="i"
+></app-event-timer-item>
+

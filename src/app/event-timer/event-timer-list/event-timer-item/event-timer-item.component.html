@@ -1,0 +1,50 @@
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+		<form [formGroup]="eventTimerForm" (ngSubmit)="onSubmit(eventTimerForm.value)">
+			
+
+					<div class="card-group">
+						<div class="card text-white bg-dark mb-1">
+							
+								<h5 class="card-header">Timer {{index + 1}}: {{eventTimers.name}}</h5>
+							
+							<div class="card-header">
+								<h5 *ngIf="playing">{{name}}</h5>
+								<input *ngIf="!playing" type="text" class="form-control" formControlName="name" placeholder="Type a name!">
+							</div>
+							
+					
+							
+							<div class="card-footer">
+                                <div class="col-md-8 offset-md-2" *ngIf="!playing; else elseBlock">
+                                    
+									<ngb-timepicker formControlName="time" ></ngb-timepicker>
+									
+                                </div>
+                                <ng-template  #elseBlock>
+									<div class="col-md-8 offset-md-2">
+										<h3>  Selected time: {{time.hour}}:{{time.minute}}:{{time.second}}</h3>
+
+									</div> 
+                                </ng-template>
+                                
+								
+							  </div>
+						</div>
+					</div>
+
+			  <hr>
+			  <button class="btn btn-success" type="submit" [disabled]="!eventTimerForm.valid" *ngIf="!playing">Play</button>
+			  
+              <button class="btn btn-light" type="button" (click)="onPause()" *ngIf="playing">Pause</button>
+              |
+			  <button class="btn btn-primary" type="button" (click)="onReset()">Reset</button>
+			  |
+			  <button class="btn btn-danger" type="button" (click)="onEliminate()">Eliminate</button>
+			  
+			  <hr>
+		</form>
+		
+        
+    </div>
+</div>
