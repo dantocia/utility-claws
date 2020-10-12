@@ -7,6 +7,7 @@ import { EventTimer } from '../../event-timer.model';
 import { EventTimerServices } from '../../event-timer.service';
 import { timer } from 'rxjs';
 import { Subscription } from 'rxjs';
+import { EventTimerLap } from '../../event-timer-lap.model';
 
 
 @Component({
@@ -15,23 +16,45 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./event-timer-item.component.css'],
   providers: [NgbTimepickerConfig]
 })
-export class EventTimerItemComponent implements OnInit {
+export class EventTimerItemComponent implements OnInit, OnDestroy {
 
   time: NgbTimeStruct = {hour: 0, minute: 0, second: 0};
   name: string;
   subscription: Subscription;
+  lapSubscription: Subscription;
+  
 
   playing = false;
+  timerEnd = false;
+  LappMode = false;
+
+
+  eventLapTimers: EventTimerLap[];
 
   @Input() eventTimers: EventTimer;
 
   @Input() index: number;
 
-  constructor(private eventTimerService: EventTimerServices, config: NgbTimepickerConfig) { config.seconds = true;
-    config.spinners = true;}
+  constructor(private eventTimerServices: EventTimerServices, config: NgbTimepickerConfig) { 
+    config.seconds = true;
+    config.spinners = true;
+    
+  }
+  
 
   ngOnInit() {
+    this.lapSubscription = this.eventTimerServices.eventTimerLapsChanged
+    .subscribe(
+      (eventTimerLap: EventTimerLap[]) =>{
+        this.eventLapTimers = eventTimerLap;
+        
+      }
+    );
     
+  
+  }
+  ngOnDestroy(){
+    this.lapSubscription.unsubscribe();
   }
 
   eventTimerForm = new FormGroup({
@@ -45,39 +68,102 @@ export class EventTimerItemComponent implements OnInit {
     console.log('on Submit original time: '+this.time.hour+':'+this.time.minute+':'+this.time.second);
     console.log('on Submit recibido time: '+eventTimer.time.hour+':'+eventTimer.time.minute+':'+eventTimer.time.second);
     this.name = eventTimer.name;
-    
-    
-   
 
     
-    console.log('on Submit convertido: '+this.time.hour+':'+this.time.minute+':'+this.time.second);
 
     const source = timer(1000, 1000);
-    this.subscription = source.subscribe( val => {
-      if(eventTimer.time.second > 0) {
+    this.subscription = source.subscribe(  () => {
+      
+      
+      
+      if(this.eventTimers.stopW){
         
-        eventTimer.time.second--;
-        this.time.second = eventTimer.time.second;
-        this.time.minute = eventTimer.time.minute;
-        this.time.hour = eventTimer.time.hour;
+        console.log('StopWatchOn'+this.eventTimers.stopW);
         
-      }
-        if(eventTimer.time.second == 0 && eventTimer.time.minute > 0 && eventTimer.time.hour >= 0){
+        
           
-          
-          eventTimer.time.second = 59;
-          eventTimer.time.minute--;
+          this.time.second = eventTimer.time.second;
           this.time.minute = eventTimer.time.minute;
-        }
-          if(eventTimer.time.minute == 0 && eventTimer.time.hour > 0){
-           
+          this.time.hour = eventTimer.time.hour;
+          eventTimer.time.second++;
+          this.time.second = eventTimer.time.second;
+
+          if(eventTimer.time.second == 60 ){
             
-            eventTimer.time.minute = 59;
-            eventTimer.time.hour--;
-            this.time.hour = eventTimer.time.hour;
+            
+            eventTimer.time.second = 0;
+            eventTimer.time.minute++;
+            this.time.second = eventTimer.time.second;
+            this.time.minute = eventTimer.time.minute;
+          }
+            if(eventTimer.time.minute == 60 ){
+             
+              
+              eventTimer.time.minute = 0;
+              eventTimer.time.hour++;
+              this.time.minute = eventTimer.time.minute;
+              this.time.hour = eventTimer.time.hour;
+            
+          
+          } 
+          
+          
+          
+          
           
         
-      } 
+      }else{
+        console.log('StopWatchOn'+this.eventTimers.stopW);
+          this.time.second = eventTimer.time.second;
+          this.time.minute = eventTimer.time.minute;
+          this.time.hour = eventTimer.time.hour;
+        if(eventTimer.time.second > 0) {
+        
+          eventTimer.time.second--;
+          this.time.second = eventTimer.time.second;
+          
+          
+          }
+          if(eventTimer.time.second == 0 && eventTimer.time.minute > 0 && eventTimer.time.hour >= 0){
+            
+            
+            eventTimer.time.second = 59;
+            eventTimer.time.minute--;
+            this.time.second = eventTimer.time.second;
+            this.time.minute = eventTimer.time.minute;
+          }
+
+            if(eventTimer.time.minute == 0 && eventTimer.time.hour > 0){
+              
+              
+              eventTimer.time.minute = 60;
+              
+              eventTimer.time.hour--;
+              this.time.hour = eventTimer.time.hour;
+              
+              this.time.minute = eventTimer.time.minute;
+            
+          
+          } 
+          if(eventTimer.time.minute == 60 && eventTimer.time.second > 0 ){
+            eventTimer.time.minute = 0;
+            eventTimer.time.hour++;
+            
+          this.time.minute = eventTimer.time.minute;
+          this.time.hour = eventTimer.time.hour;
+          }
+          if(eventTimer.time.second == 0 && eventTimer.time.minute ==0 && eventTimer.time.hour == 0){
+            if(this.subscription){
+              this.subscription.unsubscribe();
+              this.timerEnd = true;
+            }
+
+          }
+
+      }
+        
+      
+      
      
     });
 
@@ -85,27 +171,78 @@ export class EventTimerItemComponent implements OnInit {
   onPause(){
     console.log('on Pause');
     this.playing = !this.playing;
-    this.subscription.unsubscribe();
-    
-    
-    console.log('Paused');
+    if(this.subscription){
+      this.subscription.unsubscribe();
+    }
+    if(this.timerEnd){
+      this.timerEnd = false;
+    }
+  
   }
   onReset(){
     console.log('on Reset');
-    this.eventTimerForm.reset();
-    this.subscription.unsubscribe();
+    
+    if(this.subscription){
+      this.subscription.unsubscribe();
+    }
+    if(this.timerEnd){
+      this.timerEnd = false;
+    }
+    this.eventTimerForm.setValue({name: '',time: {hour:0,minute:0,second:0}});
+    this.name = '';
+    this.time.second = 0;
+    this.time.minute = 0;
+    this.time.hour = 0;
+    
     this.playing = false;
-   
+    this.eventTimers.stopW = false;
+    if(this.LappMode){
+      this.eventTimerServices.eliminateLaps();
+      this.LappMode = false
+      
+    }
   }
   onEliminate(){
     
-    this.eventTimerService.eliminateTimer(this.index);
+    this.eventTimerServices.eliminateTimer(this.index);
 
+  }
+  turnStopMode(){
+    console.log('on turnStopmode');
+    if(this.subscription){
+      this.subscription.unsubscribe();
+    }
+
+   
+    if(!this.playing){
+      this.eventTimers.stopW = !this.eventTimers.stopW;
+    }
+    if(this.playing){
+      this.playing = false;
+      this.eventTimers.stopW = !this.eventTimers.stopW;
+    }
+    if(this.timerEnd){
+      this.timerEnd = false;
+    }
+  
+    
+    this.eventTimerForm.setValue({name: '',time: {hour:0,minute:0,second:0}});
+    this.time.second = 0;
+    this.time.minute = 0;
+    this.time.hour = 0;
+   
+  }
+  OnAddLap(lapTime: EventTimerLap){
     
     
     
+    if(this.LappMode){
+      this.eventTimerServices.addNewLap(lapTime,this.index);
+  }else{
+  this.LappMode = true;
+    this.eventTimerServices.addNewLap(lapTime,this.index);
   }
   
-
+  }
 
 }

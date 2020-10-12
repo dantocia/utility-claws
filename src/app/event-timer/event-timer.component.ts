@@ -16,4 +16,7 @@ export class EventTimerComponent implements OnInit {
     this.eventTimerServices.addEmptyTimer();
 
   }
+  newStopWatch(){
+    this.eventTimerServices.addStopWatch();
+  }
 }

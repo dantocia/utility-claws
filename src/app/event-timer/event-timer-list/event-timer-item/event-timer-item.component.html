@@ -6,25 +6,43 @@
 					<div class="card-group">
 						<div class="card text-white bg-dark mb-1">
 							
-								<h5 class="card-header">Timer {{index + 1}}: {{eventTimers.name}}</h5>
+								<div class="col-md-7 offset-md-3 card-header">
+									<h5 >Timer {{index + 1}}: {{name}}</h5>
+								</div>
 							
-							<div class="card-header">
+							<div class="col-md-7 offset-md-3 card-header">
+								<button class="btn btn-light" type="button" (click)="turnStopMode()" *ngIf="!eventTimers.stopW">TiMER MODE ON</button>
+								<button class="btn btn-light" type="button"  (click)="turnStopMode()" *ngIf="eventTimers.stopW"> StOP MODE ON</button>
+								
+							</div>
+							
+							<div class="card-header" *ngIf="!playing">
+								
 								<h5 *ngIf="playing">{{name}}</h5>
-								<input *ngIf="!playing" type="text" class="form-control" formControlName="name" placeholder="Type a name!">
+								
+								<input  type="text" class="form-control" formControlName="name" placeholder="Type a name!">
 							</div>
 							
 					
 							
 							<div class="card-footer">
-                                <div class="col-md-8 offset-md-2" *ngIf="!playing; else elseBlock">
+                                <div class="col-md-8 offset-md-2" *ngIf="playing==false && eventTimers.stopW==false; else elseBlock">
                                     
 									<ngb-timepicker formControlName="time" ></ngb-timepicker>
 									
                                 </div>
                                 <ng-template  #elseBlock>
-									<div class="col-md-8 offset-md-2">
-										<h3>  Selected time: {{time.hour}}:{{time.minute}}:{{time.second}}</h3>
+									<div class="col-md-7 offset-md-3">
+										<div class="row">
+											<button class="btn btn-warning mr-1" type="button" (click)="OnAddLap(eventTimerForm.value)" *ngIf="eventTimers.stopW">Add Lap</button>
+											
+											<h2>  {{time.hour}}:{{time.minute}}:{{time.second}}</h2>
 
+											
+										
+										</div>
+										<h3 style="color: green;" *ngIf="timerEnd">Your timer has finished!</h3>
+										
 									</div> 
                                 </ng-template>
                                 
@@ -41,10 +59,29 @@
 			  <button class="btn btn-primary" type="button" (click)="onReset()">Reset</button>
 			  |
 			  <button class="btn btn-danger" type="button" (click)="onEliminate()">Eliminate</button>
+			  |
+			  
+			  <button class="btn btn-dark" type="button" (click)="turnStopMode()" *ngIf="!eventTimers.stopW">StopWacth</button>	  
+			  
+			  <button class="btn btn-dark" type="button" (click)="turnStopMode()" *ngIf="eventTimers.stopW">Timer</button>
 			  
 			  <hr>
 		</form>
 		
         
-    </div>
+	</div>
+	
+</div>
+<div class="row">
+    <div class="col-md-8 offset-md-2" *ngIf="this.LappMode">
+		<h3 style="color: crimson;">Laps taken so far: </h3>
+		<app-event-lap 
+		*ngFor="let eventLapTimer of eventLapTimers; let j = index"
+			[eventLapTimers]="eventLapTimer"
+			[index]="j"
+		></app-event-lap>
+	
+	</div>
+
+
 </div>

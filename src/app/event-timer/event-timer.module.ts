@@ -7,6 +7,7 @@ import { EventTimerComponent } from './event-timer.component';
 import { EventTimerListComponent } from './event-timer-list/event-timer-list.component';
 import { EventTimerItemComponent } from './event-timer-list/event-timer-item/event-timer-item.component';
 import { EventTimerEditComponent } from './event-timer-edit/event-timer-edit.component';
+import { EventLapComponent } from './event-timer-list/event-timer-item/event-lap/event-lap.component';
 
 
 
@@ -17,7 +18,8 @@ import { EventTimerEditComponent } from './event-timer-edit/event-timer-edit.com
         EventTimerComponent,
         EventTimerListComponent,
         EventTimerItemComponent,
-        EventTimerEditComponent
+        EventTimerEditComponent,
+        EventLapComponent
 
 	],
 	imports: [SharedModule,EventTimerRoutingModule],
